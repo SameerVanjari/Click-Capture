@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { Client } from "basic-ftp";
+import { NextResponse } from "next/server";
 const CAMERA_IP = "192.168.1.1";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   const client = new Client();
   client.ftp.verbose = true;
 
@@ -19,10 +19,13 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
       .filter((file) => file.name.match(/\.(jpg|jpeg|png)$/i))
       .map((file) => file.name);
 
-    res.json({ files: imageFiles });
+    return NextResponse.json({ files: imageFiles }, { status: 200 });
   } catch (error) {
     console.error("FTP Error:", error);
-    res.status(500).json({ error: "Failed to retrieve files from FTP" });
+    return NextResponse.json(
+      { error: "Failed to retrieve files from FTP" },
+      { status: 500 }
+    );
   } finally {
     client.close();
   }

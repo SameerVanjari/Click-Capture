@@ -17,7 +17,7 @@ export default function CameraSync() {
 
   useEffect(() => {
     checkWiFiConnection();
-  }, [CIP]);
+  }, [CIP, checkWiFiConnection]);
 
   async function checkWiFiConnection() {
     try {
@@ -38,7 +38,9 @@ export default function CameraSync() {
     try {
       const response = await fetch(`/api/${type}`);
       const data = await response.json();
-      type === "ftp" ? setFtpFiles(data.files) : setSmbFiles(data.files);
+      if (type === "ftp") {
+        setFtpFiles(data.files);
+      } else setSmbFiles(data.files);
     } catch (error) {
       console.error(`Error fetching ${type} images:`, error);
     }

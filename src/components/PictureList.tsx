@@ -1,15 +1,15 @@
 import React from "react";
 
 interface PictureListProps {
-  list: any[];
+  list: File[];
 }
 
 const PictureList: React.FC<PictureListProps> = ({ list }) => {
   return (
     <div>
       <ul>
-        {list.map((item) => (
-          <li>{item.name}</li>
+        {list.map((item, index) => (
+          <li key={index}>{item?.name}</li>
         ))}
       </ul>
     </div>
