@@ -1,2 +1,2 @@
 [build]
-  command = "unset AWS_CODEARTIFACT_AUTH_TOKEN && npm install && npm run build"
+  command = "rm -rf node_modules && rm -f package-lock.json && unset AWS_CODEARTIFACT_AUTH_TOKEN && npm install && npm run build"
