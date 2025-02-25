@@ -63,6 +63,7 @@ export default function CameraSync() {
       <button onClick={() => fetchImages("ftp")}>Fetch FTP Images</button>
       <button onClick={() => fetchImages("smb")}>Fetch SMB Images</button>
       <h2>Camera FTP Files</h2>
+
       <ul>
         {ftpFiles.map((file, index) => (
           <li key={index}>{file}</li>
@@ -74,6 +75,8 @@ export default function CameraSync() {
           <li key={index}>{file}</li>
         ))}
       </ul>
+
+      <div className="mt-10">{JSON.stringify(ftpFiles)}</div>
     </div>
   );
 }
